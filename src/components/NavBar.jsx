@@ -1,19 +1,20 @@
 "use client";
 
 import { Button, Avatar, Dropdown, Navbar } from "flowbite-react";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
     return (
-        <Navbar fluid rounded className="md:container md:mx-auto 2xl:px-0 xl:px-0 lg:px-5 md:px-5 px-5">
+        <Navbar fluid rounded className="md:container md:mx-auto 2xl:px-0 xl:px-0 lg:px-5 md:px-5 px-5 border">
             <Navbar.Brand href="/">
                 <img src="https://wp.alithemes.com/html/jobhub/frontend/assets/imgs/theme/jobhub-logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
             </Navbar.Brand>
             <div className="flex md:order-2">
-                <Dropdown
+                {/* <Dropdown
                     arrowIcon={false}
                     inline
                     label={
-                        <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+                        <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-2.jpg" rounded />
                     }
                 >
                     <Dropdown.Header>
@@ -25,15 +26,17 @@ const NavBar = () => {
                     <Dropdown.Item>Earnings</Dropdown.Item>
                     <Dropdown.Divider />
                     <Dropdown.Item>Sign out</Dropdown.Item>
-                </Dropdown>
+                </Dropdown> */}
+                <Button as="span" className="cursor-pointer px-3 bg-[#9777FA] text-base">Login</Button>
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
-                <Navbar.Link active>Home</Navbar.Link>
-                <Navbar.Link>About</Navbar.Link>
-                <Navbar.Link>Services</Navbar.Link>
-                <Navbar.Link>Pricing</Navbar.Link>
-                <Navbar.Link>Contact</Navbar.Link>
+                <NavLink to="/"><Navbar.Link active className="text-base">Home</Navbar.Link></NavLink>
+                <NavLink><Navbar.Link className="text-base">All Jobs</Navbar.Link></NavLink>
+                {/* <NavLink><Navbar.Link className="text-base">Applied Jobs</Navbar.Link></NavLink> */}
+                {/* <NavLink><Navbar.Link className="text-base">Add A Job</Navbar.Link></NavLink> */}
+                {/* <NavLink><Navbar.Link className="text-base">My Jobs</Navbar.Link></NavLink> */}
+                <NavLink><Navbar.Link className="text-base">Blogs</Navbar.Link></NavLink>
             </Navbar.Collapse>
         </Navbar>
     );
