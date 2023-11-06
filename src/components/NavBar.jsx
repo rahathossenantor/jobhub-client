@@ -36,7 +36,7 @@ const NavBar = () => {
                 {/* <NavLink><Navbar.Link className="text-base">Applied Jobs</Navbar.Link></NavLink> */}
                 {/* <NavLink><Navbar.Link className="text-base">Add A Job</Navbar.Link></NavLink> */}
                 {/* <NavLink><Navbar.Link className="text-base">My Jobs</Navbar.Link></NavLink> */}
-                <NavLink><Navbar.Link className="text-base">Blogs</Navbar.Link></NavLink>
+                <NavLink to="/blogs"><Navbar.Link className="text-base">Blogs</Navbar.Link></NavLink>
             </Navbar.Collapse>
         </Navbar>
     );
