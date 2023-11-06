@@ -7,7 +7,7 @@ const NavBar = () => {
     return (
         <Navbar fluid rounded className="md:container md:mx-auto 2xl:px-0 xl:px-0 lg:px-5 md:px-5 px-5">
             <Navbar.Brand href="/">
-                <img src="https://wp.alithemes.com/html/jobhub/frontend/assets/imgs/theme/jobhub-logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
+                <img src="https://wp.alithemes.com/html/jobhub/frontend/assets/imgs/theme/jobhub-logo.svg" className="mr-3" alt="jobhub-logo" />
             </Navbar.Brand>
             <div className="flex md:order-2">
                 {/* <Dropdown
