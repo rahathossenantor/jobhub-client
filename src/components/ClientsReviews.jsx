@@ -33,7 +33,7 @@ const reviewsData = [
 
 const ClientsReviews = () => {
     return (
-        <div className="md:container md:mx-auto 2xl:px-0 xl:px-0 lg:px-5 md:px-5 px-5 py-20 border-t">
+        <div className="md:container md:mx-auto 2xl:px-0 xl:px-0 lg:px-5 md:px-5 px-5 py-20">
             <div className="text-center">
                 <h2 className="text-5xl font-semibold mb-2">Our Happy Customer</h2>
                 <p className="text-lg mb-5">When it comes to choosing the right web hosting provider, we know how easy it is to get overwhelmed with the number.</p>
