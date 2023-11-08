@@ -43,7 +43,7 @@ const JobsCategory = () => {
             </div>
             <div>
                 <Tabs>
-                    <TabList>
+                    <TabList className="mb-5">
                         <Tab><span>All Jobs</span></Tab>
                         <Tab><span>On Site Jobs</span></Tab>
                         <Tab><span>Remote Jobs</span></Tab>

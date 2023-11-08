@@ -11,3 +11,14 @@ body {
 .active {
     color: #9777FA;
 }
+
+.react-tabs__tab span {
+    padding: 4px 13px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.react-tabs__tab--selected span {
+    background-color: #9777FA;
+    color: white;
+}
