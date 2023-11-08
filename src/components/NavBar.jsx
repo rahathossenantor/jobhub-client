@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Navbar } from "flowbite-react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const NavBar = () => {
     return (
@@ -27,16 +27,16 @@ const NavBar = () => {
                     <Dropdown.Divider />
                     <Dropdown.Item>Sign out</Dropdown.Item>
                 </Dropdown> */}
-                <Button as="span" className="cursor-pointer px-3 bg-[#9777FA] text-base">Login</Button>
+                <Button as="span" className="cursor-pointer px-3 bg-[#9777FA] text-base"><Link to="/login">Login</Link></Button>
                 <Navbar.Toggle />
             </div>
             <Navbar.Collapse>
-                <NavLink to="/"><Navbar.Link active className="text-base">Home</Navbar.Link></NavLink>
-                <NavLink><Navbar.Link className="text-base">All Jobs</Navbar.Link></NavLink>
-                {/* <NavLink><Navbar.Link className="text-base">Applied Jobs</Navbar.Link></NavLink> */}
-                {/* <NavLink><Navbar.Link className="text-base">Add A Job</Navbar.Link></NavLink> */}
-                {/* <NavLink><Navbar.Link className="text-base">My Jobs</Navbar.Link></NavLink> */}
-                <NavLink to="/blogs"><Navbar.Link className="text-base">Blogs</Navbar.Link></NavLink>
+                <Navbar.Link className="text-base"><NavLink to="/">Home</NavLink></Navbar.Link>               
+                <Navbar.Link className="text-base"><NavLink to="/alljobs">All Jobs</NavLink></Navbar.Link>
+                <Navbar.Link className="text-base"><NavLink to="appliedjobs">Applied Jobs</NavLink></Navbar.Link>
+                <Navbar.Link className="text-base"><NavLink to="addjob">Add A Job</NavLink></Navbar.Link>
+                <Navbar.Link className="text-base"><NavLink to="myjobs">My Jobs</NavLink></Navbar.Link>
+                <Navbar.Link className="text-base"><NavLink to="/blogs">Blogs</NavLink></Navbar.Link>
             </Navbar.Collapse>
         </Navbar>
     );
