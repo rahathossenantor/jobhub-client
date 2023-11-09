@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaEyeSlash, FaEye } from "react-icons/fa";
-// import { updateProfile } from "firebase/auth";
-// import Swal from "sweetalert2";
+import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 import bgImage from "../assets/bg.png";
-// import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import { Button, Checkbox, Label, TextInput } from "flowbite-react";
 
@@ -11,14 +11,13 @@ const Register = () => {
     const [isShow, setIsShow] = useState(false);
     const [errorStatus, setRrrorStatus] = useState("");
 
-    // const {
-    //     setProfileAvatar,
-    //     registerUserWithEmailAndPass,
-    //     signInUserWithGoogle,
-    //     signInUserWithGitHub
-    // } = useAuth();
+    const {
+        setProfileAvatar,
+        registerUserWithEmailAndPass,
+        signInUserWithGoogle
+    } = useAuth();
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const handleEmailPassRegister = (event) => {
         event.preventDefault();
@@ -26,8 +25,8 @@ const Register = () => {
         const name = event.target.name.value;
         const email = event.target.email.value;
         const pass = event.target.password.value;
-        const terms = event.target.terms.checked;
-        console.log(name, email, pass, terms);
+        const photoURL = event.target.url.value;
+        // const terms = event.target.terms.checked;
 
         // reset error status
         setRrrorStatus("");
@@ -44,49 +43,49 @@ const Register = () => {
             setRrrorStatus("Password must have at least one special character!");
             return;
         }
-        else if (!terms) {
-            setRrrorStatus("Please accept our terms & conditions!");
-            return;
-        }
+        // else if (!terms) {
+        //     setRrrorStatus("Please accept our terms & conditions!");
+        //     return;
+        // }
 
         // create new user account with email and password
-        // registerUserWithEmailAndPass(email, pass)
-        //     .then(res => {
-        //         updateProfile(res.user, {
-        //             displayName: name
-        //         })
-        //             .then(() => {
-        //                 setProfileAvatar(res.user.photoURL);
-        //             }).catch((error) => {
-        //                 setRrrorStatus(error.message);
-        //             });
-        //         event.target.reset();
-        //         Swal.fire({
-        //             title: "Success!",
-        //             text: "Registration successful!",
-        //             icon: "success",
-        //             confirmButtonText: "Close"
-        //         });
-        //         setProfileAvatar(res.user.photoURL);
-        //         navigate("/");
-        //     })
-        //     .catch(err => setRrrorStatus(err.message));
+        registerUserWithEmailAndPass(email, pass)
+            .then(res => {
+                updateProfile(res.user, {
+                    displayName: name
+                })
+                    .then(() => {
+                        setProfileAvatar(photoURL);
+                    }).catch((error) => {
+                        setRrrorStatus(error.message);
+                    });
+                event.target.reset();
+                Swal.fire({
+                    title: "Success!",
+                    text: "Registration successful!",
+                    icon: "success",
+                    confirmButtonText: "Close"
+                });
+                setProfileAvatar(photoURL);
+                navigate("/");
+            })
+            .catch(err => setRrrorStatus(err.message));
     };
 
     // create new user with google
     const handleGoogleRegister = () => {
-        // signInUserWithGoogle()
-        //     .then(res => {
-        //         setProfileAvatar(res.user.photoURL);
-        //         Swal.fire({
-        //             title: "Success!",
-        //             text: "Registration successful!",
-        //             icon: "success",
-        //             confirmButtonText: "Close"
-        //         });
-        //         navigate("/");
-        //     })
-        //     .catch(err => setRrrorStatus(err.message));
+        signInUserWithGoogle()
+            .then(res => {
+                setProfileAvatar(res.user.photoURL);
+                Swal.fire({
+                    title: "Success!",
+                    text: "Registration successful!",
+                    icon: "success",
+                    confirmButtonText: "Close"
+                });
+                navigate("/");
+            })
+            .catch(err => setRrrorStatus(err.message));
     };
 
     return (

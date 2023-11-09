@@ -39,7 +39,7 @@ const JobsCategory = () => {
         <div className="md:container md:mx-auto 2xl:px-0 xl:px-0 lg:px-5 md:px-5 px-5">
             <div className="text-center">
                 <h2 className="text-5xl font-semibold mb-2">Browse by category</h2>
-                <p className="text-lg mb-5">Find the type of work you need, clearly defined and ready to start. <br /> Work begins as soon as you purchase and provide requirements.</p>
+                <p className="text-lg mb-5">Find the type of work you need, clearly defined and ready to start. Work begins as soon as you purchase.</p>
             </div>
             <div>
                 <Tabs>

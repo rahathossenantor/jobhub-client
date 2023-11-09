@@ -5,11 +5,12 @@ import NotFound from "../pages/NotFound";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import AllJobs from "../pages/AllJobs";
+import AuthProvider from "../providers/AuthProvider";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <App></App>,
+        element: <AuthProvider><App></App></AuthProvider>,
         errorElement: <NotFound></NotFound>,
         children: [
             {

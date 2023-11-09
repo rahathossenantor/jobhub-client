@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from "react";
 import {
-    GithubAuthProvider,
     GoogleAuthProvider,
     createUserWithEmailAndPassword,
     onAuthStateChanged, signInWithEmailAndPassword,
@@ -9,7 +8,7 @@ import {
 } from "firebase/auth";
 import PropTypes from "prop-types";
 import auth from "../firebase/firebase.config";
-import axios from "axios";
+// import axios from "axios";
 
 export const AuthContext = createContext(null);
 
@@ -31,13 +30,6 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     };
 
-    // register user with github
-    const githubProvider = new GithubAuthProvider();
-    const signInUserWithGitHub = () => {
-        setLoading(true);
-        return signInWithPopup(auth, githubProvider);
-    };
-
     // sign in user with email and password
     const signInUserWithEmailAndPass = (email, password) => {
         setLoading(true);
@@ -55,23 +47,23 @@ const AuthProvider = ({ children }) => {
             setUser(currentUser);
             setLoading(false);
 
-            const userEmail = currentUser?.email || user?.email;
-            const loggedUser = { email: userEmail };
+            // const userEmail = currentUser?.email || user?.email;
+            // const loggedUser = { email: userEmail };
 
             // request for a jwt token if the user exist
-            if (currentUser) {
-                axios.post("https://cardoctors-server.vercel.app/jwt", loggedUser, { withCredentials: true })
-                    .then(res => {
-                        console.log(res.data);
-                    })
-                    .catch(err => console.error(err.message));
-            } else {
-                axios.post("https://cardoctors-server.vercel.app/logout", loggedUser, { withCredentials: true })
-                    .then(res => {
-                        console.log(res.data);
-                    })
-                    .catch(err => console.error(err.message));
-            }
+            // if (currentUser) {
+            //     axios.post("https://cardoctors-server.vercel.app/jwt", loggedUser, { withCredentials: true })
+            //         .then(res => {
+            //             console.log(res.data);
+            //         })
+            //         .catch(err => console.error(err.message));
+            // } else {
+            //     axios.post("https://cardoctors-server.vercel.app/logout", loggedUser, { withCredentials: true })
+            //         .then(res => {
+            //             console.log(res.data);
+            //         })
+            //         .catch(err => console.error(err.message));
+            // }
         });
 
         return () => unSubscribe();
@@ -84,7 +76,6 @@ const AuthProvider = ({ children }) => {
         setProfileAvatar,
         registerUserWithEmailAndPass,
         signInUserWithGoogle,
-        signInUserWithGitHub,
         signInUserWithEmailAndPass,
         signOutUser
     };
