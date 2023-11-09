@@ -52,10 +52,11 @@ const Register = () => {
         registerUserWithEmailAndPass(email, pass)
             .then(res => {
                 updateProfile(res.user, {
-                    displayName: name
+                    displayName: name,
+                    photoURL
                 })
                     .then(() => {
-                        setProfileAvatar(photoURL);
+                        setProfileAvatar(res.user.photoURL);
                     }).catch((error) => {
                         setRrrorStatus(error.message);
                     });
@@ -66,7 +67,7 @@ const Register = () => {
                     icon: "success",
                     confirmButtonText: "Close"
                 });
-                setProfileAvatar(photoURL);
+                setProfileAvatar(res.user.photoURL);
                 navigate("/");
             })
             .catch(err => setRrrorStatus(err.message));

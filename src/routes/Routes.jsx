@@ -28,6 +28,18 @@ const router = createBrowserRouter([
             {
                 path: "/alljobs",
                 element: <AllJobs></AllJobs>
+            },
+            {
+                path: "/appliedjobs",
+                element: <Login></Login>
+            },
+            {
+                path: "/myjobs",
+                element: <AllJobs></AllJobs>
+            },
+            {
+                path: "/addjob",
+                element: <Login></Login>
             }
         ]
     }

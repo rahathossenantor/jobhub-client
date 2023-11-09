@@ -1,83 +1,67 @@
 import { Button, Label, TextInput } from "flowbite-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImage from "../assets/bg.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import useAuth from "../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [isShow, setIsShow] = useState(false);
-    const [errorStatus, setRrrorStatus] = useState("");
+    const [errorStatus, setErrorStatus] = useState("");
 
-    // const {
-    //     setProfileAvatar,
-    //     registerUserWithEmailAndPass,
-    //     signInUserWithGoogle,
-    //     signInUserWithGitHub
-    // } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
 
-    // const navigate = useNavigate();
+    const {
+        setProfileAvatar,
+        signInUserWithGoogle,
+        signInUserWithEmailAndPass
+    } = useAuth();
 
-    const handleEmailPassRegister = (event) => {
+    const handleEmailPassLogin = (event) => {
         event.preventDefault();
 
         const email = event.target.email.value;
         const pass = event.target.password.value;
-        console.log(email, pass);
 
         // reset error status
-        setRrrorStatus("");
+        setErrorStatus("");
 
         if (pass.length < 6) {
-            setRrrorStatus("Password must be at least 6 characters!");
-            return;
-        }
-        else if (!/[A-Z]/.test(pass)) {
-            setRrrorStatus("Password must have at least one upper case character!");
-            return;
-        }
-        else if (!/[!@#$%^&*()_+{}\\[\]:;<>,.?~\\-]/.test(pass)) {
-            setRrrorStatus("Password must have at least one special character!");
+            setErrorStatus("Invalid password!");
             return;
         }
 
-        // create new user account with email and password
-        // registerUserWithEmailAndPass(email, pass)
-        //     .then(res => {
-        //         updateProfile(res.user, {
-        //             displayName: name
-        //         })
-        //             .then(() => {
-        //                 setProfileAvatar(res.user.photoURL);
-        //             }).catch((error) => {
-        //                 setRrrorStatus(error.message);
-        //             });
-        //         event.target.reset();
-        //         Swal.fire({
-        //             title: "Success!",
-        //             text: "Registration successful!",
-        //             icon: "success",
-        //             confirmButtonText: "Close"
-        //         });
-        //         setProfileAvatar(res.user.photoURL);
-        //         navigate("/");
-        //     })
-        //     .catch(err => setRrrorStatus(err.message));
+        // login user account with email and password
+        signInUserWithEmailAndPass(email, pass)
+            .then(res => {
+                event.target.reset();
+                Swal.fire({
+                    title: "Success!",
+                    text: "Login successful!",
+                    icon: "success",
+                    confirmButtonText: "Close"
+                });
+                setProfileAvatar(res.user.photoURL);
+            })
+            .catch(err => setErrorStatus(err.message));
     };
 
-    // create new user with google
-    const handleGoogleRegister = () => {
-        // signInUserWithGoogle()
-        //     .then(res => {
-        //         setProfileAvatar(res.user.photoURL);
-        //         Swal.fire({
-        //             title: "Success!",
-        //             text: "Registration successful!",
-        //             icon: "success",
-        //             confirmButtonText: "Close"
-        //         });
-        //         navigate("/");
-        //     })
-        //     .catch(err => setRrrorStatus(err.message));
+    // login user with google
+    const handleGoogleSignIn = () => {
+        signInUserWithGoogle()
+            .then(res => {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Login successful!",
+                    icon: "success",
+                    confirmButtonText: "Close"
+                });
+                setProfileAvatar(res.user.photoURL);
+                navigate(location?.state ? location.state : "/");
+            })
+            .catch(err => setErrorStatus(err.message));
     };
 
     return (
@@ -87,7 +71,7 @@ const Login = () => {
                     <img src={bgImage} alt="bg-image" className="w-10/12 inline-block" />
                 </div>
                 <div className="w-full lg:w-1/2 xl:w-1/2 flex flex-col items-center justify-center">
-                    <form onSubmit={handleEmailPassRegister} className="flex max-w-md flex-col gap-4 border p-6 w-[350px] md:w-[390px] lg:w-[380px] xl:w-[400px] bg-base-100 shadow-2xl">
+                    <form onSubmit={handleEmailPassLogin} className="flex max-w-md flex-col gap-4 border p-6 w-[350px] md:w-[390px] lg:w-[380px] xl:w-[400px] bg-base-100 shadow-2xl">
                         <div className="text-center">
                             <h2 className="text-4xl font-medium">Sign In Now!</h2>
                         </div>
@@ -107,11 +91,11 @@ const Login = () => {
                             </div>
                         </div>
                         <p>Don&apos;t have an acount? <Link className="text-blue-700 underline font-medium" to="/register">Register</Link></p>
-                        <Button type="submit">Register new account</Button>
+                        <Button type="submit">Sign in</Button>
                         <div className="text-center">
                             <p className="text-xl mb-2">-------------or-------------</p>
                             <div className="w-full border rounded-lg flex items-center justify-center p-2">
-                                <a onClick={handleGoogleRegister}><img src="https://wp.alithemes.com/html/jobhub/frontend/assets/imgs/slider/logo/google.svg" className="w-20 cursor-pointer" alt="Google" /></a>
+                                <a onClick={handleGoogleSignIn}><img src="https://wp.alithemes.com/html/jobhub/frontend/assets/imgs/slider/logo/google.svg" className="w-20 cursor-pointer" alt="Google" /></a>
                             </div>
                         </div>
                     </form>
